@@ -1,0 +1,265 @@
+---
+title: "Tarea 1 Econometría en R"
+author: "Juan Pablo Carranza Hurtado"
+date: "April 16, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instrucciones 
+
+Para esta y la siguiente parte deberá subir su solución en un archivo .R colocando la pregunta completa como comentario y su respuesta que considere adecuada. Escriba el código de R necesario para resolver los siguientes incisos trate de usar la menor cantidad de líneas posible.
+
+### Parte 1
+
+#### Problema 1
+
+¿Cómo generaría un arreglo aleatorio de 250 elementos con los colores primarios?
+
+
+```{r}
+
+colores <-sample(c("Rojo", "Azul", "Amarillo"), 250, replace = TRUE)
+
+#Primeras 5 filas del vector creado
+head(colores)
+
+#Longitud del vector creado
+length(colores)
+
+```
+
+
+#### Problema 2
+
+Dado un arreglo de 120000 elementos de números enteros entre 40 y 70, ¿Cómo haría para obtener la desviación estándar de aquellos números que son mayores a 55 y menores a 64?
+
+```{r}
+
+arr = runif(120000, min = 40, max = 70)
+
+# Desviación estándar de arreglo filtrado
+sd(arr[(arr > 55 & arr < 64)])
+
+```
+
+
+#### Problema 3
+
+Suponga que se almacena en una variable un arreglo con todos los números de carnet de los estudiantes del Instituto de Investigación de Operaciones de la universidad en forma de string, los carnets tiene al inicio dos caracteres que identifican el año en el que la persona entró a la universidad por ejemplo: 19004528 hace referencia a una persona que ingresó en el año 2019, 06009878 hace referencia a una persona que ingresó en el año 2006, ¿Cómo haría para contar la cantidad de alumnos por año?
+
+```{r}
+
+carnets <- c("19004528", "06009878", "11002453", "20021839", "06781256", "19021839")
+
+table(paste("20", substr(carnets, 0, 2), sep=""))
+
+```
+
+
+#### Problema 4
+
+Define el vector $y = (1, 3, 5, 7)$ utilizando la función `c()`. ¿Cómo harías con la función `seq()`?
+
+```{r}
+y = seq(1,7,2)
+
+y
+
+```
+
+
+#### Problema 5
+
+Si `b <- list(a = 1:10, c = "Hola", d = "XX")`, escriba una expresión en R que devuelva todos los elementos de la lista excepto los elementos 4,5,6, y 7 del vector a.
+
+```{r}
+
+b <- list(a = 1:10, c = "Hola", d = "XX")
+
+b$a <- c(1:3, 8:10)
+
+b
+```
+
+
+#### Problema 6
+
+Dado los siguientes vectores, muestre el código en R necesario para declarar y calcular el promedio, desviación estándar, mediana, moda y sumatoria total de los siguientes vectores.
+
+```{r}
+x = seq(8,5,-1)
+
+y = c(rep(3,8), rep(2,2))
+
+z = seq(1, 4, 0.75)
+
+summaryfunc <- function(x, name=deparse(substitute(x))){
+
+  result <- paste("Nombre de variable: ", name, " ,", 
+                  "Promedio = ", mean(x), " ,", 
+                  "Desviacion estandar =", sd(x), " ,",
+                  "Mediana =", median(x), " ,",
+                  "Moda =", mode(x), " ,",
+                  "Sumatoria total =", sum(x))
+  
+  result
+}
+
+summaryfunc(x)
+
+summaryfunc(y)
+
+summaryfunc(z)
+```
+
+
+#### Problema 7
+
+Sabemos que para sumar vectores estos deben tener la misma longitud. Sin embargo R trabaja de manera distinta. Defina los vectores $x = (1, 2, 3, 4, 5, 6)$, $y = (7, 8)$, $z = (9, 10, 11, 12)$. Calcula:
+
+a. $x + x$
+b. $x + y$ 
+c. Responda ¿Qué ha hecho R?
+
+R permite hacer operaciones entre vectores de distintas longitudes ya que aplica una suma secuencial del vector con menor tamaño sobre el vector con mayor tamaño. De esta manera, en el ejemplo, los primeros dos elementos de x, se suman con los dos elementos de y, y los siguientes dos elementos de x se vuelven a sumir con los mismos dos elementos de y, y así sucesivamente. Es por esta razón que el vector de mayor tamaño debe de ser un múltiplo del vector de menor tamaño.
+
+```{r}
+x <- seq(1,6,1)
+
+y <- c(7, 8)
+
+z <- seq(9, 12, 1)
+
+#a x + x
+
+x + x
+
+#b x + y
+x + y
+
+```
+
+
+
+#### Problema 8
+
+Dada la variable `string <- "Hola Mundo"`, se escriba una instrucción que devuelva la siguiente salida:
+
+`[[1]]
+[1] "Hola"
+[[2]]
+[1] "Mundo"
+
+```{r}
+string <- "Hola Mundo"
+
+as.list(strsplit(string, " ")[[1]])
+
+```
+
+
+### Parte 2
+
+
+Para entregar este ejercicio deber[a subir un archivo .R con la pregunta en forma de comentario, el código que generó y su respuesta como comentario. 
+
+Este ejercicio requerírá un poco de investigación, no puede utilizar ninguna otra cosa que no se le haya enseñado en clase como librerías, funciones y demás, utilice la menor cantidad de líneas posibles (1 línea idealmente), NO puede utilizar ninguna estructura de control de flujo (ciclos y condicionales)
+
+Antes de realizar este ejercicio limpie el Entorno de variables que ha construido hasta ahora, cargue el archivo data.Rdata en RStudio. Al cargalo contará que existe una única variable llamada info_estudiantes, para dicha variable responda las siguientes preguntas:
+
+
+#### 1. ¿Qué tipo de dato es info_estudiantes"
+
+
+```{r}
+
+load('data.Rdata')
+
+class(info_estudiantes)
+
+#list
+
+```
+
+#### 2. ¿Cuántos elementos tiene info_estudiantes?
+
+```{r}
+
+
+length(info_estudiantes)
+
+#3
+```
+
+#### 3. ¿Qué representa cada uno de los elementos de info estudiantes?
+
+
+```{r}
+
+names(info_estudiantes)
+
+#carnet de estudiante, promedio, y tipo de estudiante
+```
+
+#### 4. ¿Cuál es la media de los estudiantes ingresados en el año 2019?
+
+
+```{r}
+
+df <- data.frame(info_estudiantes)
+
+mean(df$promedio[df$carnet[grepl("^19", df$carnet)]])
+
+# 62.99487
+
+```
+
+#### 5. ¿Cuál es la suma de desviación estándar de los estudiantes que ingresaron en el año 2016 y 2018?
+
+
+```{r}
+
+sd(df$promedio[df$carnet[grepl("^16", df$carnet)]]) + sd(df$promedio[df$carnet[grepl("^18", df$carnet)]])
+
+#21.04642
+```
+
+#### 6. ¿Cuál es el mínimo de notas de aquellos estudiantes donde su carnet termina con los números 45 a 48?
+
+
+```{r}
+
+min(df$promedio[df$carnet[grepl("(45|46|47|48)$", df$carnet)]])
+
+#69
+```
+
+#### 7. ¿Cuál es la probabilidad de que un estudiante tipo A tenga una nota mayor a 85?
+
+
+```{r}
+
+length(df$tipo[df$tipo == "A"]) / length(df$tipo[df$promedio > 85])
+
+# 0.9832099
+```
+
+#### 8. ¿Cuál es la probabilidad de que un estudiante tipo C haya ingresado en el año 2017 o 2019?
+
+
+```{r}
+
+length(df$carnet[df$tipo == "C"])/length(df$carnet[grepl("^(17|19)", df$carnet)])
+
+#0.5073679
+
+```
+
+
+
+
+
