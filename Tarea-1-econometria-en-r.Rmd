@@ -1,5 +1,5 @@
 ---
-title: "Tarea 1 Econometría en R"
+title: "Tarea 1 Econometria en R"
 author: "Juan Pablo Carranza Hurtado"
 date: "April 16, 2020"
 output: html_document
@@ -7,17 +7,18 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(DescTools)
 ```
 
 ## Instrucciones 
 
-Para esta y la siguiente parte deberá subir su solución en un archivo .R colocando la pregunta completa como comentario y su respuesta que considere adecuada. Escriba el código de R necesario para resolver los siguientes incisos trate de usar la menor cantidad de líneas posible.
+Para esta y la siguiente parte deberá subir su solución en un archivo .R colocando la pregunta completa como comentario y su respuesta que considere adecuada. Escriba el código de R necesario para resolver los siguientes incisos trate de usar la menor cantidad de lineas posible.
 
 ### Parte 1
 
 #### Problema 1
 
-¿Cómo generaría un arreglo aleatorio de 250 elementos con los colores primarios?
+¿Como generaria un arreglo aleatorio de 250 elementos con los colores primarios?
 
 
 ```{r}
@@ -35,13 +36,13 @@ length(colores)
 
 #### Problema 2
 
-Dado un arreglo de 120000 elementos de números enteros entre 40 y 70, ¿Cómo haría para obtener la desviación estándar de aquellos números que son mayores a 55 y menores a 64?
+Dado un arreglo de 120000 elementos de numeros enteros entre 40 y 70, �Como haria para obtener la desviacion estandar de aquellos numeros que son mayores a 55 y menores a 64?
 
 ```{r}
 
 arr = runif(120000, min = 40, max = 70)
 
-# Desviación estándar de arreglo filtrado
+# Desviacion estandar de arreglo filtrado
 sd(arr[(arr > 55 & arr < 64)])
 
 ```
@@ -49,7 +50,7 @@ sd(arr[(arr > 55 & arr < 64)])
 
 #### Problema 3
 
-Suponga que se almacena en una variable un arreglo con todos los números de carnet de los estudiantes del Instituto de Investigación de Operaciones de la universidad en forma de string, los carnets tiene al inicio dos caracteres que identifican el año en el que la persona entró a la universidad por ejemplo: 19004528 hace referencia a una persona que ingresó en el año 2019, 06009878 hace referencia a una persona que ingresó en el año 2006, ¿Cómo haría para contar la cantidad de alumnos por año?
+Suponga que se almacena en una variable un arreglo con todos los numeros de carnet de los estudiantes del Instituto de Investigacion de Operaciones de la universidad en forma de string, los carnets tiene al inicio dos caracteres que identifican el anio en el que la persona entro a la universidad por ejemplo: 19004528 hace referencia a una persona que ingreso en el anio 2019, 06009878 hace referencia a una persona que ingreso en el anio 2006, �Como haria para contar la cantidad de alumnos por anio?
 
 ```{r}
 
@@ -62,7 +63,7 @@ table(paste("20", substr(carnets, 0, 2), sep=""))
 
 #### Problema 4
 
-Define el vector $y = (1, 3, 5, 7)$ utilizando la función `c()`. ¿Cómo harías con la función `seq()`?
+Define el vector $y = (1, 3, 5, 7)$ utilizando la funcion `c()`. �Como harias con la funcion `seq()`?
 
 ```{r}
 y = seq(1,7,2)
@@ -74,7 +75,7 @@ y
 
 #### Problema 5
 
-Si `b <- list(a = 1:10, c = "Hola", d = "XX")`, escriba una expresión en R que devuelva todos los elementos de la lista excepto los elementos 4,5,6, y 7 del vector a.
+Si `b <- list(a = 1:10, c = "Hola", d = "XX")`, escriba una expresion en R que devuelva todos los elementos de la lista excepto los elementos 4,5,6, y 7 del vector a.
 
 ```{r}
 
@@ -88,7 +89,7 @@ b
 
 #### Problema 6
 
-Dado los siguientes vectores, muestre el código en R necesario para declarar y calcular el promedio, desviación estándar, mediana, moda y sumatoria total de los siguientes vectores.
+Dado los siguientes vectores, muestre el codigo en R necesario para declarar y calcular el promedio, desviacion estandar, mediana, moda y sumatoria total de los siguientes vectores.
 
 ```{r}
 x = seq(8,5,-1)
@@ -103,7 +104,7 @@ summaryfunc <- function(x, name=deparse(substitute(x))){
                   "Promedio = ", mean(x), " ,", 
                   "Desviacion estandar =", sd(x), " ,",
                   "Mediana =", median(x), " ,",
-                  "Moda =", mode(x), " ,",
+                  "Moda =", Mode(x), " ,",
                   "Sumatoria total =", sum(x))
   
   result
@@ -125,7 +126,7 @@ a. $x + x$
 b. $x + y$ 
 c. Responda ¿Qué ha hecho R?
 
-R permite hacer operaciones entre vectores de distintas longitudes ya que aplica una suma secuencial del vector con menor tamaño sobre el vector con mayor tamaño. De esta manera, en el ejemplo, los primeros dos elementos de x, se suman con los dos elementos de y, y los siguientes dos elementos de x se vuelven a sumir con los mismos dos elementos de y, y así sucesivamente. Es por esta razón que el vector de mayor tamaño debe de ser un múltiplo del vector de menor tamaño.
+R permite hacer operaciones entre vectores de distintas longitudes ya que aplica una suma secuencial del vector con menor tamaño sobre el vector con mayor tamanio. De esta manera, en el ejemplo, los primeros dos elementos de x, se suman con los dos elementos de y, y los siguientes dos elementos de x se vuelven a sumir con los mismos dos elementos de y, y asi sucesivamente. Es por esta razon que el vector de mayor tamanio debe de ser un multiplo del vector de menor tamanio.
 
 ```{r}
 x <- seq(1,6,1)
@@ -147,7 +148,7 @@ x + y
 
 #### Problema 8
 
-Dada la variable `string <- "Hola Mundo"`, se escriba una instrucción que devuelva la siguiente salida:
+Dada la variable `string <- "Hola Mundo"`, se escriba una instruccion que devuelva la siguiente salida:
 
 `[[1]]
 [1] "Hola"
@@ -165,14 +166,14 @@ as.list(strsplit(string, " ")[[1]])
 ### Parte 2
 
 
-Para entregar este ejercicio deber[a subir un archivo .R con la pregunta en forma de comentario, el código que generó y su respuesta como comentario. 
+Para entregar este ejercicio deber[a subir un archivo .R con la pregunta en forma de comentario, el codigo que genero y su respuesta como comentario. 
 
-Este ejercicio requerírá un poco de investigación, no puede utilizar ninguna otra cosa que no se le haya enseñado en clase como librerías, funciones y demás, utilice la menor cantidad de líneas posibles (1 línea idealmente), NO puede utilizar ninguna estructura de control de flujo (ciclos y condicionales)
+Este ejercicio requerira� un poco de investigacion, no puede utilizar ninguna otra cosa que no se le haya enseniado en clase como librerias, funciones y demas, utilice la menor cantidad de lineas posibles (1 linea idealmente), NO puede utilizar ninguna estructura de control de flujo (ciclos y condicionales)
 
-Antes de realizar este ejercicio limpie el Entorno de variables que ha construido hasta ahora, cargue el archivo data.Rdata en RStudio. Al cargalo contará que existe una única variable llamada info_estudiantes, para dicha variable responda las siguientes preguntas:
+Antes de realizar este ejercicio limpie el Entorno de variables que ha construido hasta ahora, cargue el archivo data.Rdata en RStudio. Al cargalo notaran que existe una unica variable llamada info_estudiantes, para dicha variable responda las siguientes preguntas:
 
 
-#### 1. ¿Qué tipo de dato es info_estudiantes"
+#### 1. �Que tipo de dato es info_estudiantes"
 
 
 ```{r}
@@ -185,7 +186,7 @@ class(info_estudiantes)
 
 ```
 
-#### 2. ¿Cuántos elementos tiene info_estudiantes?
+#### 2. �Cuantos elementos tiene info_estudiantes?
 
 ```{r}
 
@@ -195,7 +196,7 @@ length(info_estudiantes)
 #3
 ```
 
-#### 3. ¿Qué representa cada uno de los elementos de info estudiantes?
+#### 3. �Que representa cada uno de los elementos de info estudiantes?
 
 
 ```{r}
@@ -205,7 +206,7 @@ names(info_estudiantes)
 #carnet de estudiante, promedio, y tipo de estudiante
 ```
 
-#### 4. ¿Cuál es la media de los estudiantes ingresados en el año 2019?
+#### 4. �Cual es la media de los estudiantes ingresados en el anio 2019?
 
 
 ```{r}
@@ -218,7 +219,7 @@ mean(df$promedio[df$carnet[grepl("^19", df$carnet)]])
 
 ```
 
-#### 5. ¿Cuál es la suma de desviación estándar de los estudiantes que ingresaron en el año 2016 y 2018?
+#### 5. �Cual es la suma de desviacion estandar de los estudiantes que ingresaron en el anio 2016 y 2018?
 
 
 ```{r}
@@ -228,7 +229,7 @@ sd(df$promedio[df$carnet[grepl("^16", df$carnet)]]) + sd(df$promedio[df$carnet[g
 #21.04642
 ```
 
-#### 6. ¿Cuál es el mínimo de notas de aquellos estudiantes donde su carnet termina con los números 45 a 48?
+#### 6. �Cual es el minimo de notas de aquellos estudiantes donde su carnet termina con los numeros 45 a 48?
 
 
 ```{r}
@@ -238,7 +239,7 @@ min(df$promedio[df$carnet[grepl("(45|46|47|48)$", df$carnet)]])
 #69
 ```
 
-#### 7. ¿Cuál es la probabilidad de que un estudiante tipo A tenga una nota mayor a 85?
+#### 7. �Cual es la probabilidad de que un estudiante tipo A tenga una nota mayor a 85?
 
 
 ```{r}
@@ -248,7 +249,7 @@ length(df$tipo[df$tipo == "A"]) / length(df$tipo[df$promedio > 85])
 # 0.9832099
 ```
 
-#### 8. ¿Cuál es la probabilidad de que un estudiante tipo C haya ingresado en el año 2017 o 2019?
+#### 8. �Cual es la probabilidad de que un estudiante tipo C haya ingresado en el anio 2017 o 2019?
 
 
 ```{r}

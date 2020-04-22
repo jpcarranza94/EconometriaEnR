@@ -60,7 +60,6 @@ y <-rnorm(60, 20, 3)
 df.datos <- data.frame(x=x, y=y)
 df.datos
 
-
 df.datos$x
 df.datos$y
 
