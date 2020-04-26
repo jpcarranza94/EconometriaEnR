@@ -244,19 +244,20 @@ min(df$promedio[df$carnet[grepl("(45|46|47|48)$", df$carnet)]])
 
 ```{r}
 
-length(df$tipo[df$tipo == "A"]) / length(df$tipo[df$promedio > 85])
+length(df$tipo[df$promedio > 85 & df$tipo == "A"]) /length(df$tipo[df$tipo == "A"])
 
-# 0.9832099
+# 0.2461075
 ```
+
 
 #### 8. ¿Cual es la probabilidad de que un estudiante tipo C haya ingresado en el anio 2017 o 2019?
 
 
 ```{r}
 
-length(df$carnet[df$tipo == "C"])/length(df$carnet[grepl("^(17|19)", df$carnet)])
+length(df$tipo[grepl("^(17|19)", df$carnet) & df$tipo == "C"]) / length(df$carnet[df$tipo == "C"])
 
-#0.5073679
+#0.4972459
 
 ```
 

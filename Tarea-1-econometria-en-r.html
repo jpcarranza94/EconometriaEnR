@@ -382,7 +382,7 @@ summary {
 
 #Primeras 5 filas del vector creado
 head(colores)</code></pre>
-<pre><code>## [1] &quot;Azul&quot; &quot;Azul&quot; &quot;Azul&quot; &quot;Azul&quot; &quot;Azul&quot; &quot;Rojo&quot;</code></pre>
+<pre><code>## [1] &quot;Rojo&quot;     &quot;Rojo&quot;     &quot;Rojo&quot;     &quot;Azul&quot;     &quot;Amarillo&quot; &quot;Amarillo&quot;</code></pre>
 <pre class="r"><code>#Longitud del vector creado
 length(colores)</code></pre>
 <pre><code>## [1] 250</code></pre>
@@ -394,7 +394,7 @@ length(colores)</code></pre>
 
 # Desviacion estandar de arreglo filtrado
 sd(arr[(arr &gt; 55 &amp; arr &lt; 64)])</code></pre>
-<pre><code>## [1] 2.602623</code></pre>
+<pre><code>## [1] 2.60453</code></pre>
 </div>
 <div id="problema-3" class="section level4">
 <h4>Problema 3</h4>
@@ -543,15 +543,15 @@ mean(df$promedio[df$carnet[grepl(&quot;^19&quot;, df$carnet)]])</code></pre>
 </div>
 <div id="cual-es-la-probabilidad-de-que-un-estudiante-tipo-a-tenga-una-nota-mayor-a-85" class="section level4">
 <h4>7. ¿Cual es la probabilidad de que un estudiante tipo A tenga una nota mayor a 85?</h4>
-<pre class="r"><code>length(df$tipo[df$tipo == &quot;A&quot;]) / length(df$tipo[df$promedio &gt; 85])</code></pre>
-<pre><code>## [1] 0.9832099</code></pre>
-<pre class="r"><code># 0.9832099</code></pre>
+<pre class="r"><code>length(df$tipo[df$promedio &gt; 85 &amp; df$tipo == &quot;A&quot;]) /length(df$tipo[df$tipo == &quot;A&quot;])</code></pre>
+<pre><code>## [1] 0.2461075</code></pre>
+<pre class="r"><code># 0.2461075</code></pre>
 </div>
 <div id="cual-es-la-probabilidad-de-que-un-estudiante-tipo-c-haya-ingresado-en-el-anio-2017-o-2019" class="section level4">
 <h4>8. ¿Cual es la probabilidad de que un estudiante tipo C haya ingresado en el anio 2017 o 2019?</h4>
-<pre class="r"><code>length(df$carnet[df$tipo == &quot;C&quot;])/length(df$carnet[grepl(&quot;^(17|19)&quot;, df$carnet)])</code></pre>
-<pre><code>## [1] 0.5073679</code></pre>
-<pre class="r"><code>#0.5073679</code></pre>
+<pre class="r"><code>length(df$tipo[grepl(&quot;^(17|19)&quot;, df$carnet) &amp; df$tipo == &quot;C&quot;]) / length(df$carnet[df$tipo == &quot;C&quot;])</code></pre>
+<pre><code>## [1] 0.4972459</code></pre>
+<pre class="r"><code>#0.4972459</code></pre>
 </div>
 </div>
 </div>
