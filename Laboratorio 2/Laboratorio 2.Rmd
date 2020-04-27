@@ -1,0 +1,177 @@
+---
+title: "Laboratorio 2"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Analisis de Elecciones Primarias con Dplyr
+
+### Utilizando dplyr y el dataset de las elecciones primarias (primary.csv) conteste las siguientes preguntas, si es necesario realizar gráficas utilice ggplot2
+
+```{r}
+
+# Se importan librerias
+library(dplyr)
+library(ggplot2)
+```
+
+
+```{r}
+#Se importa el dataset
+
+dfprimaries <- read.csv("primary_results.csv")
+
+
+str(dfprimaries)
+
+```
+
+
+### ¿Cuántos candidatos estaban en las primarias? 
+
+```{r}
+
+dfprimaries %>%
+  summarise( Unique_Candidates = n_distinct(candidate))
+
+# Hubo 16 candidatos
+
+```
+
+
+### ¿Cuántos candidatos estaban en las primarias? 
+
+```{r}
+
+dfprimaries %>%
+  summarise( Unique_Candidates = n_distinct(candidate))
+
+# Hubo 16 candidatos
+
+```
+
+### ¿Qué partido obtuvo la mayor cantidad de votos en Florida?
+
+```{r}
+
+dfprimaries %>% 
+  filter(state == "Florida") %>%
+  group_by(party)%>%
+  summarise(totalvotes = sum(votes)) %>%
+  arrange(-totalvotes) %>%
+  head(1)
+
+# Los republicanos presentaron más votos en Florida con 2276926	votos
+
+```
+
+### ¿Qué condado de Florida es el que tiene la mayor cantidad de votantes?
+
+```{r}
+dfprimaries %>%
+  filter(state == "Florida") %>%
+  group_by(county) %>%
+  summarise(totalvotes = sum(votes)) %>%
+  arrange(-totalvotes) %>%
+  head(1)
+
+#Miami-Dade con 344894 votos
+
+```
+
+### En el estado de Florida, que condado tuvo la mayor cantidad de votantes, ¿Qué candidato tuvo la mayor cantidad de votos y de qué partido era?
+
+```{r}
+
+dfprimaries %>%
+  filter( state == "Florida" & county == "Miami-Dade") %>%
+  group_by(candidate) %>%
+  summarise(totalvotes = sum(votes), party = party) %>%
+  arrange(-totalvotes) %>%
+  head(1)
+
+#En el condado de Miami-Dade la candidata con mayor numero de votos fue Hillary Clinton, del partido democrata, con 129467 votos. 
+
+```
+
+### ¿Cuántas personas votaron por Hillary Clinton y cuántas por Donald Trump en Estados Unidos?
+
+```{r}
+dfprimaries %>%
+  filter( candidate %in% c("Donald Trump", "Hillary Clinton")) %>%
+  group_by(candidate) %>%
+  summarise(totalvotes = sum(votes))
+
+#Donald Trump obtuvo 13302541 votos, Hillary Clinton obtuvo 15692452
+
+```
+
+### ¿Cuál es la probabilidad de que si alguien sea republicano en Florida haya votado por Jeb Bush?
+
+```{r}
+
+
+JebBush<- dfprimaries %>% 
+  filter(party == "Republican", state == "Florida", candidate == "Jeb Bush") %>%
+  summarise(totalvotes = sum(votes))
+
+FloridaRep <- dfprimaries %>%
+  filter( party == "Republican", state == "Florida") %>%
+  summarise(totalvotes = sum(votes))
+
+JebBush$totalvotes / FloridaRep$totalvotes
+
+# La probabilidad de que alguien republicano de Florida haya votado por Jeb Bush es 0
+
+```
+
+
+### Dado que una persona voto por Ted Cruz, ¿Cuál es la probabilidad que sea de California?
+
+```{r}
+
+TedCruz <- dfprimaries %>%
+  filter( candidate == "Ted Cruz")%>%
+  summarise(totalvotes = sum(votes))
+
+TedCruzCali <- dfprimaries %>%
+  filter( candidate == "Ted Cruz", state == "California")%>%
+  summarise(totalvotes = sum(votes))
+
+TedCruzCali$totalvotes / TedCruz$totalvotes
+
+# La probabilidad de que alguien sea de california dado que voto por TedCruz es 0.01895632
+
+```
+
+### Dado que una persona es de Texas, ¿Cuál es la probabilidad que vote por Donald Trump?
+
+```{r}
+Texans <- dfprimaries %>%
+  filter(state == "Texas") %>%
+  summarise(totalvotes = sum(votes))
+
+DonaldTrumpTexans <- dfprimaries %>%
+  filter(state == "Texas", candidate == "Donald Trump") %>%
+  summarise(totalvotes = sum(votes))
+
+DonaldTrumpTexans$totalvotes / Texans$totalvotes
+
+# La probabilidad de que alguien haya votado por Trump dado que es de Texas es de 0.1826515
+```
+
+### ¿Qué condado de los Estados Unidos es el que tuvo la mayor cantidad de votantes?
+ 
+```{r}
+
+dfprimaries %>%
+  group_by(county) %>%
+  summarise(totalvotes = sum(votes))%>%
+  arrange(-totalvotes) %>%
+  head(1)
+
+# El condado con la mayor número de votantes fue Los Angeles con 1268622 votantes
+
+```
+
